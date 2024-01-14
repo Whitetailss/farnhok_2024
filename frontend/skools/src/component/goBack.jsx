@@ -1,19 +1,24 @@
 import * as React from 'react';
-import {withRouter} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
-class GoBack extends React.Component{
-    
-  goBack = () => {
-    this.props.history.goBack();
+const GoBack = (props) => {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
   };
 
-  render() {
-    return (
-      <div>
-        <button id='goBack' className={this.props.goBackClass} onClick={this.goBack}>{this.props.goBack}</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <button
+        id='goBack'
+        className={props.goBackClass}
+        onClick={goBack}
+      >
+        {props.goBack}
+      </button>
+    </div>
+  );
+};
 
-export default GoBack = withRouter(GoBack);
+export default GoBack;

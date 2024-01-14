@@ -1,238 +1,203 @@
-import React from 'react';
-import { withRouter} from 'react-router-dom';
-import {connect} from 'react-redux'
-import {Container, Row, Col, Collapse} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp, faChevronDown, faMinus} from '@fortawesome/free-solid-svg-icons'
-import '../../assets/css/search/sortBar.css'
-import { teacherClick, followerClick, scoreClick, sizeClick, teacherClickReverse, followerClickReverse, scoreClickReverse, sizeClickReverse } from '../../redux/search/actions.js';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Container, Row, Col, Collapse } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronUp, faChevronDown, faMinus } from '@fortawesome/free-solid-svg-icons';
+import '../../assets/css/search/sortBar.css';
+import {
+  teacherClick,
+  followerClick,
+  scoreClick,
+  sizeClick,
+  teacherClickReverse,
+  followerClickReverse,
+  scoreClickReverse,
+  sizeClickReverse
+} from '../../redux/search/actions.js';
 
-class PureSortBar extends React.Component {
-    constructor(props) {
-        super(props)
+const PureSortBar = ({ result, teacherClick, followerClick, scoreClick, sizeClick, teacherClickReverse, followerClickReverse, scoreClickReverse, sizeClickReverse }) => {
+  const [collapse, setCollapse] = useState(true);
+  const [sortStyle, setSortStyle] = useState('searchSortDropButton');
+  const [sortArrow, setSortArrow] = useState(faChevronUp);
+  const [teacherArrow, setTeacherArrow] = useState(faChevronDown);
+  const [teacherArrowState, setTeacherArrowState] = useState(true);
+  const [followerArrow, setFollowerArrow] = useState(faMinus);
+  const [followerArrowState, setFollowerArrowState] = useState(false);
+  const [scoreArrow, setScoreArrow] = useState(faMinus);
+  const [scoreArrowState, setScoreArrowState] = useState(false);
+  const [sizeArrow, setSizeArrow] = useState(faMinus);
+  const [sizeArrowState, setSizeArrowState] = useState(false);
+  const [sortMessage, setSortMessage] = useState(' - Greatest to least');
 
-        this.state = {
-            collapse: true,
-            sortStyle: 'searchSortDropButton',
-            sortArrow: faChevronUp,
-            teacherArrow: faChevronDown,
-            teacherArrowState: true,
-            followerArrow: faMinus,
-            followerArrowState: false,
-            scoreArrow: faMinus,
-            scoreArrowState: false,
-            sizeArrow: faMinus,
-            sizeArrowState: false,
-            sortMessage: ' - Greatest to least'
-        };
-    };
+  const navigate = useNavigate();
 
-    toggle = () => {
-        this.setState(state => ({ collapse: !state.collapse }));
-        if (this.state.collapse === false) {
-            this.setState({
-                sortStyle: 'searchSortDropButton',
-                sortArrow: faChevronUp
-            })
-        } else {
-            this.setState({
-                sortStyle: 'searchSortDropButton searchSearchDropBottom',
-                sortArrow: faChevronDown,
-            })
-        };
-    };
-
-    teacherClick = () => {
-        if (this.state.teacherArrowState) {
-            this.props.teacherClickReverse(this.props.result);
-            this.setState({
-                teacherArrow: faChevronUp,
-                teacherArrowState: false,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Least to greatest'            
-            })
-        } else {
-            this.props.teacherClick(this.props.result);
-            this.setState({
-                teacherArrow: faChevronDown,
-                teacherArrowState: true,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Greatest to least'
-            })
-        }
+  const toggle = () => {
+    setCollapse(prevCollapse => !prevCollapse);
+    if (!collapse) {
+      setSortStyle('searchSortDropButton');
+      setSortArrow(faChevronUp);
+    } else {
+      setSortStyle('searchSortDropButton searchSearchDropBottom');
+      setSortArrow(faChevronDown);
     }
+  };
 
-    followerClick = () => {
-        if (this.state.followerArrowState) {
-            this.props.followerClickReverse(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faChevronUp,
-                followerArrowState: false,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Least to greatest'
-            })
-        } else {
-            this.props.followerClick(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faChevronDown,
-                followerArrowState: true,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Greatest to least'
-            })
-        }
+  const handleTeacherClick = () => {
+    if (teacherArrowState) {
+      teacherClickReverse(result);
+      setTeacherArrow(faChevronUp);
+      setTeacherArrowState(false);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Least to greatest');
+    } else {
+      teacherClick(result);
+      setTeacherArrow(faChevronDown);
+      setTeacherArrowState(true);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Greatest to least');
     }
+  };
 
-    scoreClick = () => {
-        if (this.state.scoreArrowState) {
-            this.props.scoreClickReverse(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faChevronUp,
-                scoreArrowState: false,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Least to greatest'
-            })
-        } else {
-            this.props.scoreClick(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faChevronDown,
-                scoreArrowState: true,
-                sizeArrow: faMinus,
-                sizeArrowState: false,
-                sortMessage: ' - Greatest to least'
-            })
-        }
+  const handleFollowerClick = () => {
+    if (followerArrowState) {
+      followerClickReverse(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faChevronUp);
+      setFollowerArrowState(false);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Least to greatest');
+    } else {
+      followerClick(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faChevronDown);
+      setFollowerArrowState(true);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Greatest to least');
     }
+  };
 
-    sizeClick = () => {
-        if (this.state.sizeArrowState) {
-            this.props.sizeClickReverse(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faChevronUp,
-                sizeArrowState: false,
-                sortMessage: ' - Least to greatest'
-            })
-        } else {
-            this.props.sizeClick(this.props.result);
-            this.setState({
-                teacherArrow: faMinus,
-                teacherArrowState: false,
-                followerArrow: faMinus,
-                followerArrowState: false,
-                scoreArrow: faMinus,
-                scoreArrowState: false,
-                sizeArrow: faChevronDown,
-                sizeArrowState: true,
-                sortMessage: ' - Greatest to least'
-            })
-        }
+  const handleScoreClick = () => {
+    if (scoreArrowState) {
+      scoreClickReverse(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faChevronUp);
+      setScoreArrowState(false);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Least to greatest');
+    } else {
+      scoreClick(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faChevronDown);
+      setScoreArrowState(true);
+      setSizeArrow(faMinus);
+      setSizeArrowState(false);
+      setSortMessage(' - Greatest to least');
     }
+  };
 
-    render() {
-        return (
-            <div> 
-                <div className='searchSearchButtonDrop'>
-                    <div className={this.state.sortStyle} onClick={this.toggle}>
-                        <h5 className="searchSearchArrow">Sort By<span>{this.state.sortMessage}</span></h5>
-                        <FontAwesomeIcon  className="searchSearchArrow" size="lg" icon={this.state.sortArrow} color='#0FACF3'/>
-                    </div>
-                </div>
-                <Collapse isOpen={this.state.collapse}>
-                    <div id='sortContainer'>
-                        <Container>
-                            <Row>
-                                <Col className='sortBox' md="3" xs="6" onClick={this.teacherClick}>
-                                     <p className="searchSearchArrow">Teachers</p>
-                                     <FontAwesomeIcon  className="searchSearchArrow" color='#0FACF3' size="lg" icon={this.state.teacherArrow}/>
-                                </Col>
-                                <Col className='sortBox1' md="3" xs="6" onClick={this.followerClick}>
-                                    <p className="searchSearchArrow">Followers</p>
-                                     <FontAwesomeIcon className="searchSearchArrow" size="lg" color='#0FACF3' icon={this.state.followerArrow} />
-                                </Col>
-                                <Col className='sortBox2' md="3" xs="6" onClick={this.scoreClick}>
-                                    <p className="searchSearchArrow">Score</p>
-                                     <FontAwesomeIcon className="searchSearchArrow" size="lg"  color='#0FACF3' icon={this.state.scoreArrow} />
-                                </Col>
-                                <Col className='sortBox3' md="3" xs="6" onClick={this.sizeClick}>
-                                    <p className="searchSearchArrow">Size</p>
-                                     <FontAwesomeIcon className="searchSearchArrow" size="lg" color='#0FACF3' icon={this.state.sizeArrow} />
-                                </Col>
-                            </Row>
-                        </Container>
-                    </div>
-                </Collapse>
+  const handleSizeClick =() => {
+    if (sizeArrowState) {
+      sizeClickReverse(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faChevronUp);
+      setSizeArrowState(false);
+      setSortMessage(' - Least to greatest');
+    } else {
+      sizeClick(result);
+      setTeacherArrow(faMinus);
+      setTeacherArrowState(false);
+      setFollowerArrow(faMinus);
+      setFollowerArrowState(false);
+      setScoreArrow(faMinus);
+      setScoreArrowState(false);
+      setSizeArrow(faChevronDown);
+      setSizeArrowState(true);
+      setSortMessage(' - Greatest to least');
+    }
+  };
+
+  const handleSearchSortClick = () => {
+    navigate('/search-sort');
+  };
+
+  return (
+    <Container fluid={true}>
+      <Row>
+        <Col className="searchSortBar">
+          <div className="searchSortButton" onClick={toggle}>
+            <FontAwesomeIcon icon={sortArrow} className={sortStyle} />
+            Sort by
+          </div>
+          <Collapse isOpen={!collapse} className="searchSortDrop">
+            <div className="searchSortDropRow">
+              <div className="searchSortDropButton" onClick={handleTeacherClick}>
+                <FontAwesomeIcon icon={teacherArrow} className="searchSortDropIcon" />
+                Teacher
+              </div>
+              <div className="searchSortDropButton" onClick={handleFollowerClick}>
+                <FontAwesomeIcon icon={followerArrow} className="searchSortDropIcon" />
+                Follower
+              </div>
+              <div className="searchSortDropButton" onClick={handleScoreClick}>
+                <FontAwesomeIcon icon={scoreArrow} className="searchSortDropIcon" />
+                Score
+              </div>
+              <div className="searchSortDropButton" onClick={handleSizeClick}>
+                <FontAwesomeIcon icon={sizeArrow} className="searchSortDropIcon" />
+                Size
+              </div>
             </div>
-        )
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        result: state.search.result
-    }
+          </Collapse>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        teacherClick: (result) => {
-            dispatch(teacherClick(result))
-        },
-        followerClick: (result) => {
-            dispatch(followerClick(result))
-        },
-        scoreClick: (result) => {
-            dispatch(scoreClick(result))
-        },
-        sizeClick: (result) => {
-            dispatch(sizeClick(result))
-        },
-        teacherClickReverse: (result) => {
-            dispatch(teacherClickReverse(result))
-        },
-        followerClickReverse: (result) => {
-            dispatch(followerClickReverse(result))
-        },
-        scoreClickReverse: (result) => {
-            dispatch(scoreClickReverse(result))
-        },
-        sizeClickReverse: (result) => {
-            dispatch(sizeClickReverse(result))
-        }
-    }
+const mapStateToProps = state => ({
+  result: state.search.result
+});
+
+const mapDispatchToProps = {
+  teacherClick,
+  followerClick,
+  scoreClick,
+  sizeClick,
+  teacherClickReverse,
+  followerClickReverse,
+  scoreClickReverse,
+  sizeClickReverse
 };
 
-export const SearchSortBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(PureSortBar))
+export const SearchSortBar = connect(mapStateToProps, mapDispatchToProps)(PureSortBar);

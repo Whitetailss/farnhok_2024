@@ -1,48 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { NavBar } from './component/navBar';
-import { Router } from './Router';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { checkLogin } from './redux/auth/actions';
 import { checkCmsLogin } from './redux/cmsAuth/actions';
-import './assets/css/font.css'
-import Footer from './component/footer';
+import './assets/css/font.css';
+import NavBar from './component/NavBar';
+import Router from './Router';
+import Footer from './component/Footer';
 
-class PureApp extends React.Component {
+const App = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
 
-  componentDidMount() {
-    this.props.checkCmsLogin()
-    this.props.checkLogin()
-  }
+  useEffect(() => {
+    dispatch(checkCmsLogin());
+    dispatch(checkLogin());
+  }, [dispatch]);
 
-  render() {
-    return(
-      <div>
-          <BrowserRouter>
-            <NavBar/>
-            <Router/>
-            <Footer />
-          </BrowserRouter>
-      </div>
-    )
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-      isAuthenticated: state.auth.isAuthenticated
-  }
+  return (
+    <div>
+      <BrowserRouter>
+        {/* <NavBar /> */}
+        <Router />
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </div>
+  );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-      checkLogin: () => {
-          dispatch(checkLogin())
-      },
-      checkCmsLogin: () => {
-        dispatch(checkCmsLogin())
-    }
-  }
-};
-
-export const App = connect(mapStateToProps, mapDispatchToProps)(PureApp)
+export default App;

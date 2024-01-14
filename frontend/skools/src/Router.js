@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import HomePage from './pages/HomePage';
 import HomePageLogin from './pages/HomePageLogin';
 import LoginPage from './pages/LoginPage';
@@ -18,87 +18,56 @@ import CmsEventPage from './pages/CmsEventPage';
 import CmsSocialPage from './pages/CmsSocialPage';
 import SocialPage from './pages/ViewSocial';
 
+const PureRouter = () => {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isSchoolAuthenticated = useSelector((state) => state.cmsAuth.isSchoolAuthenticated);
 
-class PureRouter extends React.Component {
-
-    render() {
-        return (
-            // style={{paddingTop: '8.5vh'}}
-            <div>
-                {this.props.isAuthenticated ? (
-                    <div>
-                        <Switch>
-                            <Route exact path='/' component={HomePageLogin} />
-                            <Route exact path='/profile' component={ProfilePage} />
-                            <Route exact path='/setting' component={SettingProfilePage} />
-                            <Route exact path='/search' component={SearchPage} />
-                            <Route exact path='/compare' component={ComparePage} />
-                            <Route path='/detail' component={SchoolDetailPage} />
-                            <Route exact path='/setting' component={SettingProfilePage} />
-                            <Route exact path='/setting/password' component={SettingPasswordPage} />
-                            <Route exact path='/setting/others' component={SettingOthersPage} />
-                            <Route component={HomePageLogin} />
-                        </Switch>
-                    </div>
-                    ) : 
-                    //testing version
-                    // (<div>
-                    //     <Switch>
-                    //         <Route exact path='/cms/school_details' component={CmsDetailsPage} />
-                    //         <Route exact path='/cms/events' component={CmsEventPage} />
-                    //         <Route exact path='/cms/social' component={CmsSocialPage} />
-                    //         <Route exact path='/cmsAuth' component={SchoolAuthPage}/>
-                    //         <Route component={HomePage} />
-                    //         <Route component={CmsDetailsPage} />
-                    //         </Switch>
-                    //         </div>)
-                    
-                    
-                    // +++++++++++++++++++++++++++Finalized version+++++++++++++++++++++
-                    
-                    this.props.isSchoolAuthenticated ? (
-                    <div>
-                        <Switch>
-                            <Route exact path='/cms/school_details' component={CmsDetailsPage} />
-                            <Route exact path='/cms/events' component={CmsEventPage} />
-                            <Route exact path='/cms/social' component={CmsSocialPage} />
-                            <Route exact path='/cms/socialTest/6' component={SocialPage} />
-                            <Route component={CmsDetailsPage} />
-                        </Switch>
-                    </div>
-                    ) : (
-                    <div>
-                        <Switch>
-                        <Route exact path='/cms/school_details' component={CmsDetailsPage} />
-
-                        {/* <Route exact path='/cms/eventmodal' component={EventModal} /> */}
-                        {/* <Route exact path='/cms/showevents' component={CmsShowEvents} /> */}
-
-                        <Route exact path='/cms/events' component={CmsEventPage} />
-
-                            <Route exact path='/' component={HomePage} />
-                            <Route exact path='/login' component={LoginPage} />
-                            <Route exact path='/signup' component={SignUpPage} />
-                            <Route exact path='/search' component={SearchPage} />
-                            <Route exact path='/compare' component={ComparePage} />
-                            <Route path='/detail' component={SchoolDetailPage} />
-                            <Route exact path='/cmsAuth' component={SchoolAuthPage}/>
-                            <Route component={LoginPage} />
-                        </Switch>
-                    </div>
-                    )
-                    }
-            
-            </div>
-        )
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.auth.isAuthenticated,
-        isSchoolAuthenticated: state.cmsAuth.isSchoolAuthenticated
-    }
+  return (
+    <div>
+      {isAuthenticated ? (
+        <div>
+          <Routes>
+            <Route path="/" element={<HomePageLogin />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/setting" element={<SettingProfilePage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/compare" element={<ComparePage />} />
+            <Route path="/detail" element={<SchoolDetailPage />} />
+            <Route path="/setting/password" element={<SettingPasswordPage />} />
+            <Route path="/setting/others" element={<SettingOthersPage />} />
+            <Route path="*" element={<HomePageLogin />} />
+          </Routes>
+        </div>
+      ) : isSchoolAuthenticated ? (
+        <div>
+          <Routes>
+            <Route path="/cms/school_details" element={<CmsDetailsPage />} />
+            <Route path="/cms/events" element={<CmsEventPage />} />
+            <Route path="/cms/social" element={<CmsSocialPage />} />
+            <Route path="/cms/socialTest/6" element={<SocialPage />} />
+            <Route path="*" element={<CmsDetailsPage />} />
+          </Routes>
+        </div>
+      ) : (
+        <div>
+          <Routes>
+            <Route path="/cms/school_details" element={<CmsDetailsPage />} />
+            {/* <Route path='/cms/eventmodal' element={<EventModal />} /> */}
+            {/* <Route path='/cms/showevents' element={<CmsShowEvents />} /> */}
+            <Route path="/cms/events" element={<CmsEventPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/compare" element={<ComparePage />} />
+            <Route path="/detail" element={<SchoolDetailPage />} />
+            <Route path="/cmsAuth" element={<SchoolAuthPage />} />
+            <Route path="*" element={<LoginPage />} />
+          </Routes>
+        </div>
+      )}
+    </div>
+  );
 };
 
-export const Router = connect(mapStateToProps)(PureRouter)
+export default PureRouter;
