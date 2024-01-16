@@ -28,8 +28,11 @@ app.use('/users', auth.authUser, userRouter)
 app.use('/event', auth.authUser,eventRouter)
 app.use('/', schoolSearchRouter)
 
-const hostname = process.env.WEB_HOSTNAME;
-const port = process.env.DB_HOSTPORT;
+// const hostname = process.env.WEB_HOSTNAME;
+// const port = process.env.DB_HOSTPORT;
+
+const hostname = 'localhost';
+const port = 5000;
 
 app.listen(port, hostname, function () {
     console.log('The ' + hostname + ' server is listening to port ' + port)

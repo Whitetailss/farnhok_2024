@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -64,7 +64,7 @@ export const PureLogin = (props) => {
           <p>Sign into your account here.</p>
         </div>
         <div>
-          <FacebookLogin
+          {/* <FacebookLogin
             className='loginButton'
             appId='339253950099115'
             autoLoad={false}
@@ -72,7 +72,7 @@ export const PureLogin = (props) => {
             fields='name,email,picture'
             onClick={componentClick}
             callback={responseFacebook}
-          />
+          /> */}
         </div>
         <br />
         <div className='loginText' id='loginOr'>

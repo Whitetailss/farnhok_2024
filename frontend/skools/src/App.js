@@ -20,9 +20,9 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        {/* <NavBar /> */}
+        <NavBar />
         <Router />
-        {/* <Footer /> */}
+        <Footer />
       </BrowserRouter>
     </div>
   );

@@ -9,7 +9,7 @@ module.exports = {
     connection: {
       database: 'skools', //process.env.DATABASE_NAME,
       user:     'postgres',//process.env.DB_USERNAME,
-      password: 'postgres'//process.env.PASSWORD
+      password: 'QAZWSX'//process.env.PASSWORD
       // database: process.env.DATABASE_NAME,
       // user:     process.env.USER,
       // password: process.env.PASSWORD
@@ -19,7 +19,11 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      // tableName: 'knex_migrations'
+      tableName: 'migrations'
+    },
+    seeds: {
+      directory: './seeds'
     }
   },
 
@@ -35,7 +39,8 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      // tableName: 'knex_migrations'
+      tableName: 'migrations'
     }
   },
 
@@ -51,7 +56,8 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      // tableName: 'knex_migrations'
+      tableName: 'migrations'
     }
   }
   
