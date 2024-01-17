@@ -57,7 +57,11 @@ export const SearchBar = ({ location, day, searchSchool }) => {
     };
 
     console.log(searchResult);
-    searchSchool(searchResult);
+
+    console.log('before searchSchool')
+    searchSchool(searchResult)
+    
+    console.log('after searchSchool');
 
     navigate('/search');
 
@@ -71,7 +75,7 @@ export const SearchBar = ({ location, day, searchSchool }) => {
     <div>
       <div className="searchSearchButtonDrop">
         <div className={searchStyle} onClick={toggle}>
-          <h5 className="searchSearchArrow">What can we help you to find?</h5>
+          <h5 className="searchSearchArrow">What would you like to find?</h5>
           <FontAwesomeIcon
             className="searchSearchArrow"
             size="lg"

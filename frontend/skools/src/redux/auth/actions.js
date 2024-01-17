@@ -37,14 +37,18 @@ function loginFailure() {
 
 export function loginUser(email, password) {
     return (dispatch) => {
-        return axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,
+        // return axios.post(`${process.env.REACT_APP_API_SERVER}/api/login`,
+        // http://localhost:8080/api/signup
+        console.log('login first part')
+        
+        return axios.post(`http://localhost:8080/api/login`,
             {
                 email: email,
                 password: password
             }
         )
         .then(response => {
-            console.log(response)
+            console.log('login second part response', response)
             if(response.data == null){
                 dispatch(loginFailure());
             } else if (!response.data.token){
@@ -97,6 +101,8 @@ function signUpFailure() {
 
 export function signUpUser(email, password) {
     return (dispatch) => {
+        console.log('inside signUpUser first part')
+        
         return axios.post(`http://localhost:8080/api/signup`,
             {
                 email: email,
@@ -104,6 +110,7 @@ export function signUpUser(email, password) {
             }
         )
         .then(response => {
+            console.log('inside signUpUser second part')
             console.log('signup' + response);
             if(!response.data){
                 dispatch(signUpFailure());

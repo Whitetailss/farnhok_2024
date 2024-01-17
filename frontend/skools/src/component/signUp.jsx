@@ -24,6 +24,8 @@ const PureSignUp = ({ isSignUp, signUpUser }) => {
   };
 
   const validateEmail = (email) => {
+
+    // console.log('validateEmail')
     const emailAddress = /\S+@\S+\.\S+/;
     return emailAddress.test(email);
   };
@@ -41,6 +43,8 @@ const PureSignUp = ({ isSignUp, signUpUser }) => {
       setErrorStylePassword('errorStyle');
       setErrorStyleUser('loginInput');
     } else {
+
+      // console.log('yoyo im here')
       setErrorMessage('');
       setErrorStyleUser('loginInput');
       setErrorStylePassword('loginInput');

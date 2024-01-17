@@ -32,7 +32,7 @@ app.use('/', schoolSearchRouter)
 // const port = process.env.DB_HOSTPORT;
 
 const hostname = 'localhost';
-const port = 5000;
+const port = 8080;
 
 app.listen(port, hostname, function () {
     console.log('The ' + hostname + ' server is listening to port ' + port)

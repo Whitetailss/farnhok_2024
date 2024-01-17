@@ -12,27 +12,31 @@ const axios = require('axios')
 
 //User account sign up route
 router.post('/api/signup', async function (req, res) {
+
+    // console.log('inside backend /api/signup')
  
 
     let email = req.body.email;
     let password = req.body.password;
- console.log(email, password)
+ console.log('new email and password', email, password)
     let hash = await bcrypt.hashPassword(password);
-    console.log("Got to here")
+    // console.log("Got to here")
     let dataArr = [
         email,
         hash
     ]
-    console.log(dataArr)
+    console.log('dataArr', dataArr)
 
     let query = `select * from users where email = $1`
     let users = await SQL.sqlQueryWithArray(query, [req.body.email]);
+
+    // console.log('users with query and req body email', users)
     if (users.length == 0) {
         
         let query2 = `insert into users (email, password) values ($1, $2) returning id`
         let newUser = await SQL.sqlQueryWithArray(query2, dataArr);
 
-        console.log(newUser)
+        // console.log('newUser users=length is 0', newUser)
 
         if (newUser !== undefined) {
             var payload = {
@@ -47,7 +51,7 @@ router.post('/api/signup', async function (req, res) {
             let followEntry = await SQL.sqlQueryWithArray(query, [payload.id])
             let reviewEntry = await SQL.sqlQueryWithArray(query2, [payload.id])
 
-            console.log(followEntry, reviewEntry)
+            console.log("followEntry, reviewEntry", followEntry, reviewEntry)
 
             const token = jwt.encode(payload, config.jwtSecret);//authentication
 
@@ -59,6 +63,9 @@ router.post('/api/signup', async function (req, res) {
             res.status(401).json(info)
         }
     } else {
+
+    console.log('entered the else')
+
         res.send(false)
     }
 })
@@ -101,10 +108,10 @@ router.post('/api/cms/signup', async function (req, res) {
             //let query4 = `insert into social_card (school_id) values ($1)` 
             let query5 =`insert into school_contact_info (school_id) values ($1)`
 
-            //let photoEntry = await SQL.sqlQueryWithArray(query, [payload.id])
-            //let videoEntry = await SQL.sqlQueryWithArray(query2, [payload.id])
+            let photoEntry = await SQL.sqlQueryWithArray(query, [payload.id])
+            let videoEntry = await SQL.sqlQueryWithArray(query2, [payload.id])
             let detailsEntry = await SQL.sqlQueryWithArray(query3, [payload.id])
-            //let socialEntry = await SQL.sqlQueryWithArray(query4, [payload.id])
+            let socialEntry = await SQL.sqlQueryWithArray(query4, [payload.id])
             let contactEntry = await SQL.sqlQueryWithArray(query5, [payload.id])
             
             console.log(photoEntry, videoEntry, detailsEntry, socialEntry, contactEntry)
@@ -125,22 +132,46 @@ router.post('/api/cms/signup', async function (req, res) {
 
 //User login and generate jwt from backend
 router.post("/api/login", async function (req, res) {
+
+    // console.log('entered backend /api/login')
     if (req.body.email && req.body.password) {
 
         var email = req.body.email;
         var password = req.body.password;
         console.log(email, password)
         //query db using email only and use bcrypt to check if password is the same as that in the db
-        let sqlStatement = `select * from users where email=$1`
+        // let sqlStatement = `select * from users where email=$1`
+
+        let sqlStatement = `SELECT * FROM users WHERE email = $1`
         let dataArray = [email]
+
+        // console.log('dataArray still successful', dataArray)
+        // console.log('sqlStatement', sqlStatement)
         let user = await SQL.sqlQueryWithArray(sqlStatement, dataArray)
-        console.log(user)
+        // console.log('sql statement', user)
 
         if (user[0] != undefined) {
+            // console.log('enter user[0] != undefined passed through before bcrypt')
+
+            // console.log('password', password)
+
+            // user[0].password = 'password123'
+            // console.log('user[0].password', user[0].password)
+
+            // user[0].password = 'password123'
+
             let result = await bcrypt.checkPassword(password, user[0].password);
+
+            // console.log('bcrypt result', result)
+
+            // console.log('enter user[0] != undefined passed through after bcrypt')
             if (!result) {
+                // console.log('password is NOT correct!')
+
                 res.send('Password is incorrect')
             } else {
+
+                console.log('password is correct!')
 
                 var payload = {
                     id: user[0].id
@@ -169,6 +200,8 @@ router.post("/api/login", async function (req, res) {
 
             }
         } else {
+            // console.log('Account does not exist')
+
             res.send('Account does not exist')
         }
 

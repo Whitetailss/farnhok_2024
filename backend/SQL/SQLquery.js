@@ -1,9 +1,9 @@
-require('dotenv').config();
+// require('dotenv').config();
 var pg = require('pg');
 
 var config = {
     user: 'postgres', //'wah',
-    database: 'postgres', //'postgres',
+    database: 'skools', //'postgres',
     password: 'QAZWSX',//'postgres', //whatever your password is, the default is postgres or password, try both
     host: 'localhost',//'localhost',
     port: 5432,//5432,
@@ -31,8 +31,12 @@ const sqlQueryWithArray = async function (sqlStatement, dataArr) {
         console.log("check 1")
         // BEGIN
 
+        // console.log('sqlQueryWithArray sqlStatement', sqlStatement)
+        // console.log('sqlQueryWithArray dataArr', dataArr)
         //SQLStatement
+
         let result = await client.query(sqlStatement, dataArr);
+
         console.log("check 2")
         await client.query("COMMIT")
         resultSet = result.rows;

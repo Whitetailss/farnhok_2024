@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 module.exports.hashPassword = (plainTextPassword) => {
@@ -24,8 +25,11 @@ module.exports.checkPassword = (plainTextPassword, hashedPassword) => {
             if(err) {
                 reject(err);
             }
+        console.log('bcrypt match', match)
 
             resolve(match);
+
+            console.log('bcrypt after check passed')
         });
     });
 };

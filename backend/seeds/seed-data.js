@@ -73,7 +73,7 @@ exports.seed = function (knex, Promise) {
 
       // Inserts seed entries
       return knex('school_users').insert([
-        {id:1, username: 'hapSchool', password: '123'},
+        {id:1, username: 'hapSchool', password: 'password123'},
         {id:2, username: 'marketing', password: '321'}
       ])
     // })
@@ -107,6 +107,18 @@ exports.seed = function (knex, Promise) {
           profile_pic: 'profile.jpg', 
           facebook_id: '987654321', 
           access_token: 'xyzabc456', 
+          created_at: new Date(), 
+          updated_at: new Date() 
+        },
+        { 
+          id: 35,
+          email: 'abc@gmail.co', 
+          first_name: '', 
+          last_name: '', 
+          password: '$2b$10$vJNSQ8XEGM2yP33yzHAMmuRejcOkHLLHfO6Ned96tFRlioGFTjLFm', 
+          profile_pic: 'profile.jpg', 
+          facebook_id: '', 
+          access_token: '', 
           created_at: new Date(), 
           updated_at: new Date() 
         },

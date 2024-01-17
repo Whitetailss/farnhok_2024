@@ -48,6 +48,8 @@ export const PureLogin = (props) => {
 
   const checkLogin = () => {
     if (props.isAuthenticated) {
+
+      console.log('props.isAuthenticated')
       navigate('/');
     } else {
       setErrorMessage('Please check your Email and password');

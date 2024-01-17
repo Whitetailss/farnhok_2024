@@ -59,38 +59,38 @@ export function submitCmsContent(bannerImg, mainVideo, contactInfo, moreDetails)
     }
 } 
 
-
-// export function submitCmsMedia(facility, teacher){
-//     console.log('got here with save media button')
-//     return  (dispatch) =>{
+// Originally commented out
+export function submitCmsMedia(facility, teacher){
+    console.log('got here with save media button')
+    return  (dispatch) =>{
       
-//         let cmsOptions = {
-//             method: 'POST',
-//             url: `http://localhost:8080/school/api`,
-//             data:{
-//                 facility: facility,
-//                 teacher: teacher,
-//                 },
-//             headers:{
-//                 'Authorization': 'Bearer ' + localStorage.getItem('cmsToken')
-//             }
-//         } 
+        let cmsOptions = {
+            method: 'POST',
+            url: `http://localhost:8080/school/api`,
+            data:{
+                facility: facility,
+                teacher: teacher,
+                },
+            headers:{
+                'Authorization': 'Bearer ' + localStorage.getItem('cmsToken')
+            }
+        } 
                
-//         return axios(cmsOptions).then(response =>{
-//             console.log('CMS content' + response.data)
-//             if(!response.data){
-//                 dispatch(submitFailure());
-//             } else {
-//                 localStorage.setItem('school media', response.data);
-//                 dispatch(submitSuccess());
-//             }
-//         })
-//         .catch (err=>{
-//             dispatch(submitFailure());
-//         })
+        return axios(cmsOptions).then(response =>{
+            console.log('CMS content' + response.data)
+            if(!response.data){
+                dispatch(submitFailure());
+            } else {
+                localStorage.setItem('school media', response.data);
+                dispatch(submitSuccess());
+            }
+        })
+        .catch (err=>{
+            dispatch(submitFailure());
+        })
 
-//     }
-// } 
+    }
+} 
 
 
 export function uploadMedia(url, caption, uploaderName){
