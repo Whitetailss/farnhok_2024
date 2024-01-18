@@ -50,6 +50,9 @@ const postSchoolSearch = async function (req, res, next) {
     console.log('vasdvdsreq.body', req.body)
     console.log('beforeschoolDetail loop', schoolDetail);
 
+
+
+
     for (let i = 0; i < schoolDetail.length; i++) {
         let countFollow = await SQL.sqlQueryWithArray(schoolFollow, [schoolDetail[i].school_id])
         schoolDetail[i].follower = countFollow.length
