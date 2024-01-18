@@ -32,8 +32,7 @@ let SD1 = [
       has_full_day: false,
       has_long_full_day: false,
       no_of_teacher: 40,
-      created_at: 2024-01-18T06:52:44.304Z,
-      updated_at: 2024-01-18T06:52:44.304Z,
+
       profile_pic: 'https://i0.wp.com/hongkongschools.com.hk/wp-content/uploads/listing-uploads/gallery/2022/04/ESF-International-Kindergarten-Hillside-1.jpg?fit=5472%2C3648&ssl=1',
       school_name: 'Happy Kindergarten',
       location: 'Wong Tai Sin',
@@ -56,8 +55,7 @@ let SD1 = [
       has_full_day: true,
       has_long_full_day: false,
       no_of_teacher: 38,
-      created_at: 2024-01-18T06:52:44.304Z,
-      updated_at: 2024-01-18T06:52:44.304Z,
+
       profile_pic: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/HK_Peak_Guildford_Road_German_Swiss_Intl_Sch_L.JPG',
       school_name: 'Everyday Kindergarten',
       location: 'Central',
@@ -80,8 +78,7 @@ let SD1 = [
       has_full_day: true,
       has_long_full_day: false,
       no_of_teacher: 38,
-      created_at: 2024-01-18T06:52:44.304Z,
-      updated_at: 2024-01-18T06:52:44.304Z,
+
       profile_pic: 'https://hf.creative.edu.hk/wp-content/uploads/sites/34/2022/01/00D7942C-FF5D-4377-AACA-DCDE11EB3E28.jpeg',
       school_name: 'Creative Kindergarten',
       location: 'Eastern',
@@ -104,8 +101,6 @@ let SD1 = [
       has_full_day: true,
       has_long_full_day: false,
       no_of_teacher: 38,
-      created_at: 2024-01-18T06:52:44.304Z,
-      updated_at: 2024-01-18T06:52:44.304Z,
       profile_pic: 'https://media.timeout.com/images/105663276/750/422/image.jpg',
       school_name: 'Causeway Bay Victoria Kindergarten and International Nursery',
       location: 'Wan Chai',
@@ -128,8 +123,6 @@ let SD1 = [
       has_full_day: true,
       has_long_full_day: false,
       no_of_teacher: 38,
-      created_at: 2024-01-18T06:52:44.304Z,
-      updated_at: 2024-01-18T06:52:44.304Z,
       profile_pic: 'https://www.itseducation.asia/assets/images/article-images/3bdbf_9eb44_mvcps_(1).jpg',
       school_name: 'Malvern College Pre-School Hong Kong',
       location: 'Central and Western',
@@ -138,3 +131,5 @@ let SD1 = [
       half_day_tuition: '1700'
     }
   ]
+
+  let wantedArray = SD1.filter((item) => wantedCriterias.selectedLocation.includes(item.location))
