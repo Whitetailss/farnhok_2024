@@ -62,8 +62,6 @@ const postSchoolMedia = async function (req, res, next) {
     res.send('createSchoolPage')
 }
 
-
-
 const editSchoolInfo = async function (req, res, next) {
  
     let bannerImg = req.body.bannerImg;

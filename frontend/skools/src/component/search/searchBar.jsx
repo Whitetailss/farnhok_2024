@@ -9,7 +9,10 @@ import { searchSchool } from '../../redux/search/actions';
 import Loading from '../loading';
 import '../../assets/css/search/searchBar.css';
 
-export const SearchBar = ({ location, day, searchSchool }) => {
+const SearchBarComponent = ({ location, day, searchSchool, storeState }) => {
+
+  console.log('Store bigState', storeState)
+
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
@@ -56,13 +59,9 @@ export const SearchBar = ({ location, day, searchSchool }) => {
       day4: dayValues.includes(4),
     };
 
-    console.log(searchResult);
+    console.log('searchResult', searchResult)
 
-    console.log('before searchSchool')
     searchSchool(searchResult)
-    
-    console.log('after searchSchool');
-
     navigate('/search');
 
     setLoading(false);
@@ -142,6 +141,7 @@ const mapStateToProps = (state) => {
     day: state.search.day,
     location: state.search.location,
     result: state.search.result,
+    storeState: state,
   };
 };
 
@@ -153,4 +153,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+// export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export const SearchBar = connect(mapStateToProps, mapDispatchToProps)(SearchBarComponent);
+
+// import store from 

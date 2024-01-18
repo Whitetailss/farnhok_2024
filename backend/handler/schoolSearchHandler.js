@@ -2,6 +2,11 @@
 const SQL = require('../SQL/SQLquery')
 
 const postSchoolSearch = async function (req, res, next) {
+
+    console.log('postSchoolSearch req', req)
+
+    // console.log('locationadsfdasfsaff', req.body.selectedLocation)
+
     var location = req.body.selectedLocation.toString()
 
     let schoolDetails = `
@@ -30,6 +35,7 @@ const postSchoolSearch = async function (req, res, next) {
     let detailsArray = [
         req.body.schoolName || '',
         location || '',
+        // req.body.location || '',
         req.body.day1 || false,
         req.body.day2 || false,
         req.body.day3 || false,
@@ -37,6 +43,14 @@ const postSchoolSearch = async function (req, res, next) {
     ]
 
     let schoolDetail = await SQL.sqlQueryWithArray(schoolDetails, detailsArray);
+
+    let string = 'Islands,Kwun Tong,Kowloon city,North'
+    let locationArray = ['Islands','Kwun Tong','Kowloon','North']
+
+    console.log('locationadsfdasfsaff', req.body)
+
+    console.log('beforedetailsArray', detailsArray)
+    console.log('beforeschoolDetail loop', schoolDetail);
 
     for (let i = 0; i < schoolDetail.length; i++) {
         let countFollow = await SQL.sqlQueryWithArray(schoolFollow, [schoolDetail[i].school_id])
@@ -54,8 +68,11 @@ const postSchoolSearch = async function (req, res, next) {
             schoolDetail[i].score = '-'
         }
     }
-    console.log(schoolDetail);
-    res.send(schoolDetail)
+    console.log('afterschoolDetail loop', schoolDetail);
+    // console.log('detailsArray2345678', detailsArray)
+    res.send( schoolDetail)
+
+    // res.send('req', req)
 }
 
 

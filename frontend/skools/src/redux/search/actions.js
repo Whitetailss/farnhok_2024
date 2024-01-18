@@ -14,10 +14,15 @@ export const CLEAR_COMPARE = 'CLEAR_COMPARE';
 export const CLEAR_ONE_COMPARE = 'CLEAR_ONE_COMPARE';
 export const COMPARE_BUTTON_TRUE = 'COMPARE_BUTTON_TRUE';
 
+// http://localhost:8080/api/login
+
+        // return axios.post(`${process.env.REACT_APP_API_SERVER}/api/search`,
+
 export function searchSchool(result) {
-    console.log(result)
+    console.log('entered searchSchool')
+    console.log('searchSchool RESULT', result)
     return (dispatch) => {
-        return axios.post(`${process.env.REACT_APP_API_SERVER}/api/search`,
+        return axios.post(`http://localhost:8080/api/search`,
         {
             schoolName: result.schoolName,
             selectedLocation: result.selectedLocation,
@@ -27,7 +32,7 @@ export function searchSchool(result) {
             day4: result.day4,
         })
         .then(response => {
-            console.log(response.data)
+            console.log('schools data', response.data)
             dispatch({
                 type: SEARCH_SCHOOL,
                 result: response.data

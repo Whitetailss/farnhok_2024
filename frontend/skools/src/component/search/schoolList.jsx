@@ -10,7 +10,7 @@ import {
 } from '../../redux/search/actions';
 import '../../assets/css/search/schoolList.css';
 
-export const SearchSchoolList = ({
+const SearchSchoolListComponent = ({
   result,
   compare,
   compareButtonStatus,
@@ -18,7 +18,10 @@ export const SearchSchoolList = ({
   clearCompare,
   clearOneCompare,
   compareButtonTrue,
+  bigState
 }) => {
+
+  console.log('bigState', bigState)
   const navigate = useNavigate();
 
   const compareSchool = (e) => {
@@ -49,6 +52,8 @@ export const SearchSchoolList = ({
     }
     console.log(compare);
   };
+
+  console.log('schools result', result)
 
   return (
     <div className={!compareButtonStatus ? '' : 'searchSchoolContainerMargin'}>
@@ -164,6 +169,7 @@ const mapStateToProps = (state) => {
     result: state.search.result,
     compare: state.search.compare,
     compareButtonStatus: state.search.compareButtonStatus,
+    bigState: state
   };
 };
 
@@ -184,4 +190,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchSchoolList);
+// SearchSchoolList
+// export default connect(mapStateToProps, mapDispatchToProps)(SearchSchoolList);
+export const SearchSchoolList = connect(mapStateToProps, mapDispatchToProps)(SearchSchoolListComponent);

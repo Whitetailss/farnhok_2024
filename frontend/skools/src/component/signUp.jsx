@@ -113,7 +113,8 @@ const PureSignUp = ({ isSignUp, signUpUser }) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSignUp: state.auth.signUpMessage,
+    // isSignUp: state.auth.signUpMessage,
+    isSignUp: state.auth.isSignUp,
   };
 };
 
