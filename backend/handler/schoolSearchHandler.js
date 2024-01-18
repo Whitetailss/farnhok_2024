@@ -47,9 +47,7 @@ const postSchoolSearch = async function (req, res, next) {
     let string = 'Islands,Kwun Tong,Kowloon city,North'
     let locationArray = ['Islands','Kwun Tong','Kowloon','North']
 
-    console.log('locationadsfdasfsaff', req.body)
-
-    console.log('beforedetailsArray', detailsArray)
+    console.log('vasdvdsreq.body', req.body)
     console.log('beforeschoolDetail loop', schoolDetail);
 
     for (let i = 0; i < schoolDetail.length; i++) {
