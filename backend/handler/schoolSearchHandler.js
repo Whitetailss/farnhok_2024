@@ -44,8 +44,7 @@ const postSchoolSearch = async function (req, res, next) {
 
     let schoolDetail = await SQL.sqlQueryWithArray(schoolDetails, detailsArray);
 
-    let string = 'Islands,Kwun Tong,Kowloon city,North'
-    let locationArray = ['Islands','Kwun Tong','Kowloon','North']
+
 
     console.log('vasdvdsreq.body', req.body)
     console.log('beforeschoolDetail loop', schoolDetail);

@@ -261,7 +261,7 @@ const PureUploader = ({ style, text, hasCaption, hasClear, uploaderName, uploadM
             type='textarea'
             name='caption'
             placeholder='Caption/Description'
-            value={caption}
+            value={ caption}
             onChange={handleInput}
           />
         </div>

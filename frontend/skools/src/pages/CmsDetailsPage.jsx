@@ -179,16 +179,22 @@ const PureCmsDetailsPage = ({
   submitCmsMedia
 }) => {
 
+  console.log('PureCmsDetailsPage contactInfo', contactInfo);
+  console.log('PureCmsDetailsPage moreDetails', moreDetails);
+
+
   const submitInfo = e => {
     e.preventDefault();
-    let bannerImg = bannerUrl;
-    let mainVideo = videoUrl;
-    let contactInfo = contactInfo;
-    let moreDetails = moreDetails;
+    let bannerImgInput = bannerUrl;
+    let mainVideoInput = videoUrl;
+    let contactInfoInput = contactInfo;
+    let moreDetailsInput = moreDetails;
 
-    console.log(bannerImg, contactInfo, mainVideo, moreDetails)
+    // console.log(bannerImg, contactInfo, mainVideo, moreDetails)
+    console.log(bannerImgInput, contactInfoInput, mainVideoInput, moreDetailsInput)
 
-    submitCmsContent(bannerImg, mainVideo, contactInfo, moreDetails);
+
+    submitCmsContent(bannerImgInput, mainVideoInput, contactInfoInput, moreDetailsInput);
   }
 
   const submitMedia = e => {
@@ -279,6 +285,7 @@ const mapStateToProps = (state) => {
     facility: state.cmsDetail.facility,
     teacher: state.cmsDetail.teacher,
     moreDetails: state.cmsDetail.moreDetails
+    
   }
 }
 
