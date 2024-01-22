@@ -105,7 +105,7 @@ router.post('/api/cms/signup', async function (req, res) {
             //let query = `insert into school_photo (school_id) values ($1)`
             //let query2 = `insert into school_video (school_id) values ($1)`
             let query3 = `insert into school_details (school_id) values ($1)` 
-            //let query4 = `insert into social_card (school_id) values ($1)` 
+            let query4 = `insert into social_card (school_id) values ($1)` 
             let query5 =`insert into school_contact_info (school_id) values ($1)`
 
             let photoEntry = await SQL.sqlQueryWithArray(query, [payload.id])

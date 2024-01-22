@@ -121,6 +121,8 @@ export function uploadMedia(url, caption, uploaderName){
 
 
 export function saveInput(contactObj, inputType){
+
+    console.log('save input inputType', inputType)
     console.log(contactObj)
     return (dispatch) =>{
         if (inputType === 'contact')

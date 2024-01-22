@@ -78,6 +78,8 @@ exports.seed = function (knex, Promise) {
     { id: 3, username: 'hfc', password: '321' },
     { id: 4, username: 'vsa', password: '321' },
     { id: 5, username: 'Malvern', password: '321' },
+    { id: 10, username: 'qwe@gmail.co', password: '$2b$10$Q64VLzXLYiF1AYU7UgDIPOIDn5SmUZ05Gg2waIfL6JxQis4grWGs.' },
+
 
   //   { username: 'hapSchool', password: 'password123' },
   // { username: 'marketing', password: '321' },
