@@ -47,13 +47,18 @@ export function submitCmsContent(bannerImg, mainVideo, contactInfo, moreDetails)
             console.log('CMS content' + response.data)
             if(!response.data){
                 dispatch(submitFailure());
+                console.log('sent data failed')
+
             } else {
                 localStorage.setItem('school detail', response.data);
                 dispatch(submitSuccess());
+                console.log('sent data success')
             }
         })
         .catch (err=>{
             dispatch(submitFailure());
+            console.log('sent data failed')
+
         })
 
     }
