@@ -94,12 +94,12 @@ const editSchoolInfo = async function (req, res, next) {
 
   
     if(req.body.contactInfo){
-        console.log('contactInfo present')
+        console.log(' editSchoolInfo contactInfo present')
         let updateStatement = `
         insert into school_contact_info
         (school_name, contact_number, address, website, email, school_id) values ($1, $2, $3, $4, $5, $6)
         `
-       console.log(req.user.id)
+       console.log('editSchoolInfo req.user.id', req.user.id)
         let dataArr = [
             schoolName,
             phone,
@@ -108,8 +108,9 @@ const editSchoolInfo = async function (req, res, next) {
             email,
             req.user.id
         ]
-         console.log(dataArr)
+         console.log('editSchoolInfo dataArr', dataArr)
         await SQL.sqlQueryWithArray(updateStatement, dataArr)
+        // console.log('updated school contact info')
     }
     
     if (req.body.moreDetails){
@@ -119,7 +120,6 @@ const editSchoolInfo = async function (req, res, next) {
         (has_am, am_student, am_tuition, has_pm, pm_student, pm_tuition, has_full_day, full_day_student, full_day_tuition,has_long_full_day, long_full_day_student, long_full_day_tuition, has_subsidy, subsidy_amt, no_of_teacher, school_name, profile_pic, location, school_id) values ($1, $2, $3, $4, $5,$6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
         `
         
-
         let dataArr1 = [ 
             isAM, 
             noOfStudentAM, 

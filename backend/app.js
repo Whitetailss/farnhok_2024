@@ -27,7 +27,7 @@ app.use('/school', auth.authUser, schoolRouter)
 app.use('/users', auth.authUser, userRouter)
 app.use('/event', auth.authUser,eventRouter)
 app.use('/', schoolSearchRouter)
-app.use('/cms')
+// app.use('/cms')
 
 // const hostname = process.env.WEB_HOSTNAME;
 // const port = process.env.DB_HOSTPORT;
