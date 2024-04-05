@@ -1,2 +1,1 @@
-# skoolsCapstone
-capstone project
+farnhok_2024
